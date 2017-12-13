@@ -121,7 +121,7 @@ namespace TravelAgency.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TravelAgency.Web.Models.ApplicationUser", b =>
+            modelBuilder.Entity("TravelAgency.Data.Models.User", b =>
                 {
                     b.Property<string>("Id");
 
@@ -180,7 +180,7 @@ namespace TravelAgency.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("TravelAgency.Web.Models.ApplicationUser")
+                    b.HasOne("TravelAgency.Data.Models.User")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -188,7 +188,7 @@ namespace TravelAgency.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("TravelAgency.Web.Models.ApplicationUser")
+                    b.HasOne("TravelAgency.Data.Models.User")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -201,7 +201,7 @@ namespace TravelAgency.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TravelAgency.Web.Models.ApplicationUser")
+                    b.HasOne("TravelAgency.Data.Models.User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
