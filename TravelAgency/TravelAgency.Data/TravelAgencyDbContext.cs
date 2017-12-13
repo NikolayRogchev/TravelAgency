@@ -11,12 +11,16 @@ namespace TravelAgency.Data
         {
         }
 
+        public DbSet<Trip> Trips { get; set; }
+        public DbSet<Country> Countries { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Country>().HasMany(c => c.Trips).WithOne(t => t.Destination).HasForeignKey(t => t.DestinationId);
+            builder.Entity<UserTrip>().HasKey(ut => new { ut.UserId, ut.TripId });
+            builder.Entity<User>().HasMany(u => u.SignedTrips).WithOne(ut => ut.User).HasForeignKey(ut => ut.UserId);
+            builder.Entity<Trip>().HasMany(t => t.SignedUsers).WithOne(ut => ut.Trip).HasForeignKey(ut => ut.TripId);
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
 }

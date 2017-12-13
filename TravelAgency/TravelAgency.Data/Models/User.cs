@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace TravelAgency.Data.Models
 {
-    // Add profile data for application users by adding properties to the User class
     public class User : IdentityUser
     {
+        public List<UserTrip> SignedTrips { get; set; } = new List<UserTrip>();
     }
 }
