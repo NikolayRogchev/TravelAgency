@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TravelAgency.Data;
 using TravelAgency.Data.Models;
+using TravelAgency.Web.Infrastructure.Extensions;
 using TravelAgency.Web.Services;
 
 namespace TravelAgency.Web
@@ -38,6 +39,7 @@ namespace TravelAgency.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseDatabaseMigration();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
