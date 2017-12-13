@@ -8,9 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TravelAgency.Web.Data;
+using TravelAgency.Data;
 using TravelAgency.Web.Models;
 using TravelAgency.Web.Services;
+using TravelAgency.Data.Models;
 
 namespace TravelAgency.Web
 {

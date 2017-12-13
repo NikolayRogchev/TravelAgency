@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TravelAgency.Data.Models;
 using TravelAgency.Web.Models;
 using TravelAgency.Web.Models.ManageViewModels;
 using TravelAgency.Web.Services;
