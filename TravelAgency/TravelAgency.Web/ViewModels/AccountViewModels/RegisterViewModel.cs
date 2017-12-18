@@ -10,6 +10,9 @@ namespace TravelAgency.Web.Models.AccountViewModels
     {
         [Required]
         [EmailAddress]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
