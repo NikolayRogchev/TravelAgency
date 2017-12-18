@@ -24,5 +24,7 @@ namespace TravelAgency.Data.Models
         [Range(0, 200)]
         public int Capacity { get; set; }
         public List<UserTrip> SignedUsers { get; set; } = new List<UserTrip>();
+        public Company Company { get; set; }
+        public int CompanyId { get; set; }
     }
 }

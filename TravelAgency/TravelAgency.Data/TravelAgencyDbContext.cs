@@ -13,6 +13,7 @@ namespace TravelAgency.Data
 
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -20,6 +21,8 @@ namespace TravelAgency.Data
             builder.Entity<UserTrip>().HasKey(ut => new { ut.UserId, ut.TripId });
             builder.Entity<User>().HasMany(u => u.SignedTrips).WithOne(ut => ut.User).HasForeignKey(ut => ut.UserId);
             builder.Entity<Trip>().HasMany(t => t.SignedUsers).WithOne(ut => ut.Trip).HasForeignKey(ut => ut.TripId);
+            builder.Entity<Company>().HasOne(c => c.Owner).WithMany(u => u.Companies).HasForeignKey(c => c.OwnerId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Company>().HasMany(c => c.Trips).WithOne(t => t.Company).HasForeignKey(t => t.CompanyId).OnDelete(DeleteBehavior.Restrict);
             base.OnModelCreating(builder);
         }
     }
