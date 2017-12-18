@@ -7,5 +7,6 @@ namespace TravelAgency.Common
     public class WebConstants
     {
         public const string AdministratorRole = "Admin";
+        public const string AdministratorArea = "Admin";
     }
 }

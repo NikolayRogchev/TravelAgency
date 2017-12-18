@@ -22,6 +22,10 @@ namespace TravelAgency.Web.Controllers
             return View();
         }
 
+        public IActionResult Trips()
+        {
+            return View();
+        }
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
