@@ -8,5 +8,6 @@ namespace TravelAgency.Common
     {
         public const string AdministratorRole = "Admin";
         public const string AdministratorArea = "Admin";
+        public const string CompanyOwnerRole = "Company Owner";
     }
 }

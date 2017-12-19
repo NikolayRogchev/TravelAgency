@@ -34,6 +34,7 @@ namespace TravelAgency.Services.Admin.Implementations
                 {
                     result.Add(new AdminUserListingServiceModel
                     {
+                        Id = user.Id,
                         Email = user.Email,
                         Roles = await this.userManager.GetRolesAsync(user),
                         UserName = user.UserName

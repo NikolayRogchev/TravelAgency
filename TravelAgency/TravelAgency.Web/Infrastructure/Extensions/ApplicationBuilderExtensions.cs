@@ -28,6 +28,7 @@ namespace TravelAgency.Web.Infrastructure.Extensions
                         var roles = new[]
                         {
                             adminName,
+                            WebConstants.CompanyOwnerRole,
                         };
 
                         foreach (var role in roles)
