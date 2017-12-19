@@ -1,16 +1,21 @@
 ﻿@model IEnumerable<CompanyListingServiceModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Companies";
 }
 
-<h2>Index</h2>
-
+<h2>My Companies</h2>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="text-center text-danger"><h4>@TempData["ErrorMessage"]</h4></div>
+}
 <div class="col-md-12">
     @foreach (CompanyListingServiceModel company in Model)
     {
-        <div class="col-md-4 panel panel-default">
-            <h3 class="text-center">@company.Name</h3>
-            <p>@company.Trips trips</p>
-        </div>
+        <a asp-action="Index" asp-controller="Trips" asp-route-id="@company.Id">
+            <div class="col-md-4 panel panel-default">
+                <h3 class="text-center">@company.Name</h3>
+                <p class="text-center"><i>@company.Trips trips</i></p>
+            </div>
+        </a>
     }
 </div>

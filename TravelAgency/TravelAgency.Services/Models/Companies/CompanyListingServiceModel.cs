@@ -4,9 +4,8 @@ using TravelAgency.Data.Models;
 
 namespace TravelAgency.Services.Models.Companies
 {
-    public class CompanyListingServiceModel : IMapFrom<Company>, IHaveCustomMapping
+    public class CompanyListingServiceModel : CompanyServiceModel, IHaveCustomMapping
     {
-        public string Name { get; set; }
         public int Trips { get; set; }
 
         public void ConfigureMapping(Profile profile)

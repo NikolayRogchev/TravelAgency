@@ -47,6 +47,7 @@ namespace TravelAgency.Web
             services.AddTransient<IAdminUserService, AdminUserService>();
             services.AddTransient<IAdminCompanyService, AdminCompanyService>();
             services.AddTransient<ICompanyService, CompanyService>();
+            services.AddTransient<ITripService, TripService>();
 
             services.AddAutoMapper();
             services.AddMvc();

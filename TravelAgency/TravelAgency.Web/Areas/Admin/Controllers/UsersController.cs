@@ -37,6 +37,7 @@ namespace TravelAgency.Web.Areas.Admin.Controllers
             });
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToRole(AddUserToRoleFormModel model)
         {
             if (!ModelState.IsValid)

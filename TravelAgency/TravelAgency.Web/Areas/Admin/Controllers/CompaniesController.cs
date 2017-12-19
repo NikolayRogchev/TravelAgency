@@ -21,6 +21,7 @@ namespace TravelAgency.Web.Areas.Admin.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateCompanyFormModel model)
         {
             if (!string.IsNullOrEmpty(model.Owner))

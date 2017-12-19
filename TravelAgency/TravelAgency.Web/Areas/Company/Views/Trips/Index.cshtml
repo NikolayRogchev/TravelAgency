@@ -1,0 +1,29 @@
+﻿@model TripListingViewModel
+@{
+    ViewData["Title"] = "Trips";
+}
+
+@if (Model.Trips.Count() != 0)
+{
+    <h2>Trips for company <i>@Model.Company</i></h2>
+
+    <div>
+        @foreach (TripListingServiceModel trip in Model.Trips)
+        {
+            <div class="col-md-4">
+                <h3>@trip.Name</h3>
+                <table>
+                    <tr>
+                        <td><label>Subscribed Users</label></td>
+                        <td>@trip.SubscribedUsers</td>
+                        @*//todo*@
+                    </tr>
+                </table>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h2>Company <i>@Model.Company</i> does not have any trips at this moment</h2>
+}
