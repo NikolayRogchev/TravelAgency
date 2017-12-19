@@ -39,6 +39,11 @@
                         @if (User.IsInRole(WebConstants.AdministratorRole))
                         {
                             <li><a asp-area="Admin" asp-controller="Users" asp-action="All">Users</a></li>
+                            <li><a asp-area="Admin" asp-controller="Companies" asp-action="Create">Create Company</a></li>
+                        }
+                        @if (User.IsInRole(WebConstants.CompanyOwnerRole))
+                        {
+                            <li><a asp-area="" asp-controller="Companies" asp-action="Index">My Companies</a></li>
                         }
                     }
                 </ul>

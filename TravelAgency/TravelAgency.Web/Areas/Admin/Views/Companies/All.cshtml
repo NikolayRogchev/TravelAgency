@@ -1,0 +1,15 @@
+﻿@model IEnumerable<AdminCompanyListingServiceModel>
+@{
+    ViewData["Title"] = "All Companies";
+}
+
+<h2>All Companies</h2>
+
+<div class="col-md-3">
+    @foreach (AdminCompanyListingServiceModel company in Model)
+    {
+        <div>
+            @company.Name
+        </div>
+    }
+</div>

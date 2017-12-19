@@ -45,6 +45,7 @@ namespace TravelAgency.Web
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IAdminUserService, AdminUserService>();
+            services.AddTransient<IAdminCompanyService, AdminCompanyService>();
 
             services.AddAutoMapper();
             services.AddMvc();
