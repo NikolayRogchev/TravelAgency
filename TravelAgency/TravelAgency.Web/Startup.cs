@@ -7,8 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TravelAgency.Data;
 using TravelAgency.Data.Models;
-using TravelAgency.Services.Admin;
-using TravelAgency.Services.Admin.Implementations;
+using TravelAgency.Services.Contracts;
+using TravelAgency.Services.Implementations;
 using TravelAgency.Web.Infrastructure.Extensions;
 using TravelAgency.Web.Services;
 
@@ -46,6 +46,7 @@ namespace TravelAgency.Web
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IAdminUserService, AdminUserService>();
             services.AddTransient<IAdminCompanyService, AdminCompanyService>();
+            services.AddTransient<ICompanyService, CompanyService>();
 
             services.AddAutoMapper();
             services.AddMvc();

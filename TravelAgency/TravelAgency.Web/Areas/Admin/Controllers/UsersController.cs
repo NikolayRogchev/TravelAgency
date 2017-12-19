@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TravelAgency.Data.Models;
-using TravelAgency.Services.Admin;
-using TravelAgency.Services.Admin.Implementations;
-using TravelAgency.Services.Admin.Models;
+using TravelAgency.Services.Contracts;
+using TravelAgency.Services.Models.Users;
 using TravelAgency.Web.Areas.Admin.ViewModels.User;
 
 namespace TravelAgency.Web.Areas.Admin.Controllers

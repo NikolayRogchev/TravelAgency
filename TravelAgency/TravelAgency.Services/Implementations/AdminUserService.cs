@@ -1,17 +1,13 @@
-﻿using AutoMapper.QueryableExtensions;
-using Microsoft.AspNetCore.Identity;
-using System;
+﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 using TravelAgency.Data;
 using TravelAgency.Data.Models;
-using TravelAgency.Services.Admin.Models;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using TravelAgency.Services.Contracts;
+using TravelAgency.Services.Models.Users;
 
-namespace TravelAgency.Services.Admin.Implementations
+namespace TravelAgency.Services.Implementations
 {
     public class AdminUserService : IAdminUserService
     {

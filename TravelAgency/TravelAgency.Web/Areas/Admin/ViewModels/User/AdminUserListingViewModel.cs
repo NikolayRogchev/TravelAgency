@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TravelAgency.Common.Mapping;
-using TravelAgency.Services.Admin.Models;
+using TravelAgency.Services.Models.Users;
 
 namespace TravelAgency.Web.Areas.Admin.ViewModels.User
 {

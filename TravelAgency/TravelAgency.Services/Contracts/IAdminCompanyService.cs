@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TravelAgency.Services.Admin.Models;
+﻿using System.Collections.Generic;
+using TravelAgency.Services.Models.Companies;
 
-namespace TravelAgency.Services.Admin
+namespace TravelAgency.Services.Contracts
 {
     public interface IAdminCompanyService
     {

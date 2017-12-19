@@ -1,0 +1,16 @@
+﻿@model IEnumerable<CompanyListingServiceModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="col-md-12">
+    @foreach (CompanyListingServiceModel company in Model)
+    {
+        <div class="col-md-4 panel panel-default">
+            <h3 class="text-center">@company.Name</h3>
+            <p>@company.Trips trips</p>
+        </div>
+    }
+</div>

@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using TravelAgency.Common.Mapping;
-using TravelAgency.Data;
 using TravelAgency.Data.Models;
 
-namespace TravelAgency.Services.Admin.Models
+namespace TravelAgency.Services.Models.Users
 {
     public class AdminUserListingServiceModel : IMapFrom<User>
     {

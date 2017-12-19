@@ -26,6 +26,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Company\Data\" />
+    <Folder Include="Areas\Company\Models\" />
     <Folder Include="wwwroot\lib\Material Design Bootstrap\" />
   </ItemGroup>
 

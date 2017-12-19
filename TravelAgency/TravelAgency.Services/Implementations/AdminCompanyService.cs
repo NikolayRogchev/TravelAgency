@@ -1,14 +1,13 @@
 ﻿using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using TravelAgency.Data;
 using TravelAgency.Data.Models;
-using TravelAgency.Services.Admin.Models;
+using TravelAgency.Services.Contracts;
+using TravelAgency.Services.Models.Companies;
 
-namespace TravelAgency.Services.Admin.Implementations
+namespace TravelAgency.Services.Implementations
 {
     public class AdminCompanyService : IAdminCompanyService
     {

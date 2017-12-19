@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TravelAgency.Data;
+using System.Threading.Tasks;
 using TravelAgency.Data.Models;
-using TravelAgency.Services.Admin;
+using TravelAgency.Services.Contracts;
 using TravelAgency.Web.Areas.Admin.ViewModels.Company;
 
 namespace TravelAgency.Web.Areas.Admin.Controllers

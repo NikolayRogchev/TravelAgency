@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TravelAgency.Common.Mapping;
+﻿using TravelAgency.Common.Mapping;
 using TravelAgency.Data.Models;
 
-namespace TravelAgency.Services.Admin.Models
+namespace TravelAgency.Services.Models.Companies
 {
     public class AdminCompanyListingServiceModel : IMapFrom<Company>
     {

@@ -5,11 +5,13 @@
 
 <h2>All Companies</h2>
 
-<div class="col-md-3">
+<div class="col-md-12">
     @foreach (AdminCompanyListingServiceModel company in Model)
     {
-        <div>
-            @company.Name
+        <div class="col-md-4 panel panel-default">
+            <h3 class="text-center">
+                @company.Name
+            </h3>
         </div>
     }
 </div>
