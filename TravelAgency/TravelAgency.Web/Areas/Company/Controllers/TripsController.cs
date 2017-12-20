@@ -54,7 +54,7 @@ namespace TravelAgency.Web.Areas.Company.Controllers
                 return View(new CreateTripViewModel { Companies = companies, Countries = countries });
             }
             this.trips.Create(model.Name, model.Company, model.Destination, model.Capacity, model.Duration, model.Price);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { id = model.Company });
         }
     }
 }

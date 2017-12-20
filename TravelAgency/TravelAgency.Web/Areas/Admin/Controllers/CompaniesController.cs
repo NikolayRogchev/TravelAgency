@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TravelAgency.Common;
 using TravelAgency.Data.Models;
 using TravelAgency.Services.Contracts;
 using TravelAgency.Web.Areas.Admin.ViewModels.Company;
@@ -37,6 +38,8 @@ namespace TravelAgency.Web.Areas.Admin.Controllers
                 return View();
             }
             this.companies.Create(model.Name, model.Owner);
+            User owner = await userManager.FindByNameAsync(model.Owner);
+            IdentityResult addToRoleResult = await userManager.AddToRoleAsync(owner, WebConstants.CompanyOwnerRole);
             return RedirectToAction(nameof(All));
         }
     }

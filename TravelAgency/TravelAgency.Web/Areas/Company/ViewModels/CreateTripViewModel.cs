@@ -24,7 +24,6 @@ namespace TravelAgency.Web.Areas.Company.ViewModels
         public int Capacity { get; set; }
         [Required]
         public int Company { get; set; }
-
         public IEnumerable<SelectListItem> Countries { get; set; }
         public IEnumerable<SelectListItem> Companies { get; set; }
     }

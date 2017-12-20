@@ -21,9 +21,9 @@ namespace TravelAgency.Services.Implementations
             this.companies = companies;
             this.countries = countries;
         }
-        public IEnumerable<TripListingServiceModel> All(int companyId)
+        public IEnumerable<TripListingServiceModel> All(int? companyId)
         {
-            return this.db.Trips.Where(t => t.Company.Id == companyId).ProjectTo<TripListingServiceModel>().ToList();
+            return this.db.Trips.Where(t => companyId == null || t.Company.Id == companyId).ProjectTo<TripListingServiceModel>().ToList();
         }
 
         public void Create(string name, int companyId, int destinationId, int capacity, int duration, decimal price)
