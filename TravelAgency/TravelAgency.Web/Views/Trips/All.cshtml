@@ -6,7 +6,14 @@
 @if (Model.Count() != 0)
 {
     <h2>All Available Trips</h2>
-    Html.RenderPartial("_TripListingPartial", Model);
+    <div class="container">
+        <div class="row">
+            @for (int j = 0; j < Model.Count(); j++)
+            {
+                Html.RenderPartial("_TripListingPartial", Model.ElementAt(j));
+            }
+        </div>
+    </div>
 }
 else
 {

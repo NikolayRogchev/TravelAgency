@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using AutoMapper;
 using TravelAgency.Common.Mapping;
@@ -11,9 +12,12 @@ namespace TravelAgency.Services.Models.Trips
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [Display(Name = "Subscribed Users")]
         public int SubscribedUsers { get; set; }
         public string Destination { get; set; }
+        [Display(Name = "From")]
         public DateTime StartDate { get; set; }
+        [Display(Name = "To")]
         public DateTime EndDate { get; set; }
         public decimal Price { get; set; }
         public bool IsSignedUp { get; set; }
