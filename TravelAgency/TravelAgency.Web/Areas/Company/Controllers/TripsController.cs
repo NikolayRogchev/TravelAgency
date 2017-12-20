@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
 using TravelAgency.Services.Contracts;
@@ -11,10 +12,12 @@ namespace TravelAgency.Web.Areas.Company.Controllers
     {
         private readonly ICompanyService companies;
         private readonly ITripService trips;
-        public TripsController(ICompanyService companies, ITripService trips)
+        private readonly ICountryService countries;
+        public TripsController(ICompanyService companies, ITripService trips, ICountryService countries)
         {
             this.companies = companies;
             this.trips = trips;
+            this.countries = countries;
         }
         public IActionResult Index(int id)
         {
@@ -26,6 +29,32 @@ namespace TravelAgency.Web.Areas.Company.Controllers
             IEnumerable<TripListingServiceModel> trips = this.trips.All(id);
             string companyName = this.companies.GetName(id)?.Name;
             return View(new TripListingViewModel { Company = companyName, Trips = trips });
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            IEnumerable<SelectListItem> countries = this.countries.All()
+                .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+            IEnumerable<SelectListItem> companies = this.companies.AllByUser(User.Identity.Name)
+                .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+            return View(new CreateTripViewModel { Companies = companies, Countries = countries });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(CreateTripViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                IEnumerable<SelectListItem> countries = this.countries.All()
+                .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+                IEnumerable<SelectListItem> companies = this.companies.AllByUser(User.Identity.Name)
+                    .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+                return View(new CreateTripViewModel { Companies = companies, Countries = countries });
+            }
+            this.trips.Create(model.Name, model.Company, model.Destination, model.Capacity, model.Duration, model.Price);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

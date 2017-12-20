@@ -9,5 +9,7 @@ namespace TravelAgency.Services.Contracts
         IEnumerable<CompanyListingServiceModel> AllByUser(string userName);
         CompanyServiceModel GetName(int id);
         bool CompanyExist(int id);
+        Company Find(string company);
+        Company FindById(int companyId);
     }
 }

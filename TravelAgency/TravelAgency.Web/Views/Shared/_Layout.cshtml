@@ -44,7 +44,7 @@
                         @if (User.IsInRole(WebConstants.CompanyOwnerRole))
                         {
                             <li><a asp-area="Company" asp-controller="Home" asp-action="Index">My Companies</a></li>
-                            <li><a asp-area="" asp-controller="Trips" asp-action="Create">Create Trip</a></li>
+                            <li><a asp-area="Company" asp-controller="Trips" asp-action="Create">Create Trip</a></li>
                         }
                     }
                 </ul>
