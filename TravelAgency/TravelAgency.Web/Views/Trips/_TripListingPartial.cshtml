@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TripListingServiceModel>
+<div>
+    @foreach (TripListingServiceModel trip in Model)
+    {
+        <div class="col-md-4">
+            <h3>@trip.Name</h3>
+            <table class="table">
+                <tr class="d-table-row">
+                    <td><label>Subscribed Users</label></td>
+                    <td>@trip.SubscribedUsers</td>
+                </tr>
+                <tr class="d-table-row">
+                    <td><label>Destination</label></td>
+                    <td>@trip.Destination</td>
+                </tr>
+                <tr class="d-table-row">
+                    <td><label>Price</label></td>
+                    <td>@trip.Price $</td>
+                </tr>
+                <tr class="d-table-row">
+                    <td colspan="2">
+                        @if (!trip.IsSignedUp)
+                        {
+                            <a class="btn btn-success" asp-area="" asp-controller="Trips" asp-action="SignUp" asp-route-id="@trip.Id">Sign Up</a>
+                        }
+                        else
+                        {
+                            <p class="text-center text-success">You are already signed up for this trip</p>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+</div>

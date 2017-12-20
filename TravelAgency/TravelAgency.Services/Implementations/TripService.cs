@@ -21,9 +21,16 @@ namespace TravelAgency.Services.Implementations
             this.companies = companies;
             this.countries = countries;
         }
-        public IEnumerable<TripListingServiceModel> All(int? companyId)
+        public IEnumerable<TripListingServiceModel> All(int? companyId, string userId)
         {
-            return this.db.Trips.Where(t => companyId == null || t.Company.Id == companyId).ProjectTo<TripListingServiceModel>().ToList();
+            List<TripListingServiceModel> signedTrips = this.db.Trips
+                .Where(t => (companyId == null || t.Company.Id == companyId) && t.SignedUsers.Any(ut => ut.UserId == userId))
+                .ProjectTo<TripListingServiceModel>(new { isSignedUp = true }).ToList();
+            List<TripListingServiceModel> unSignedTrips = this.db.Trips
+               .Where(t => (companyId == null || t.Company.Id == companyId) && !t.SignedUsers.Any(ut => ut.UserId == userId))
+               .ProjectTo<TripListingServiceModel>(new { isSignedUp = false }).ToList();
+            IEnumerable<TripListingServiceModel> result = signedTrips.Union(unSignedTrips);
+            return result;
         }
 
         public void Create(string name, int companyId, int destinationId, int capacity, int duration, decimal price)
@@ -41,6 +48,12 @@ namespace TravelAgency.Services.Implementations
                 Duration = duration,
                 Price = price
             });
+            this.db.SaveChanges();
+        }
+
+        public void SignUp(string userId, int tripId)
+        {
+            this.db.Trips.FirstOrDefault(t => t.Id == tripId).SignedUsers.Add(new UserTrip { TripId = tripId, UserId = userId });
             this.db.SaveChanges();
         }
     }

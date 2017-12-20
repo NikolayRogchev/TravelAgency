@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using TravelAgency.Data.Models;
 using TravelAgency.Services.Contracts;
 using TravelAgency.Services.Models.Trips;
 using TravelAgency.Web.Areas.Company.ViewModels;
@@ -13,20 +16,23 @@ namespace TravelAgency.Web.Areas.Company.Controllers
         private readonly ICompanyService companies;
         private readonly ITripService trips;
         private readonly ICountryService countries;
-        public TripsController(ICompanyService companies, ITripService trips, ICountryService countries)
+        private readonly UserManager<User> userManager;
+        public TripsController(ICompanyService companies, ITripService trips, ICountryService countries, UserManager<User> userManager)
         {
             this.companies = companies;
             this.trips = trips;
             this.countries = countries;
+            this.userManager = userManager;
         }
-        public IActionResult Index(int id)
+        public async Task<IActionResult> Index(int id)
         {
             if (!this.companies.CompanyExist(id))
             {
                 TempData["ErrorMessage"] = "This company does not exist";
                 return RedirectToAction(nameof(Index), "Home", null);
             }
-            IEnumerable<TripListingServiceModel> trips = this.trips.All(id);
+            User user = await this.userManager.FindByNameAsync(User.Identity.Name);
+            IEnumerable<TripListingServiceModel> trips = this.trips.All(id, user.Id);
             string companyName = this.companies.GetName(id)?.Name;
             return View(new TripListingViewModel { Company = companyName, Trips = trips });
         }
