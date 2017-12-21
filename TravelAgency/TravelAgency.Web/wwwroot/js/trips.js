@@ -32,3 +32,14 @@ trip.removeSignUp = function (tripId) {
         }
     })
 }
+trip.delete = function (tripId) {
+    $.get({
+        url: "http://localhost:51383/Company/Trips/Delete/" + tripId,
+        success: function () {
+            notifier.showSuccess("Trip removed!");
+        },
+        error: function (response) {
+            notifier.showError("Error removing trip!");
+        }
+    })
+}

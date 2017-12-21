@@ -44,7 +44,6 @@ namespace TravelAgency.Web.Areas.Company.Controllers
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
             IEnumerable<SelectListItem> companies = this.companies.AllByUser(User.Identity.Name)
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
-            this.AddNotification("Trip created!", NotificationType.Success);
             return View(new CreateTripViewModel { Companies = companies, Countries = countries });
         }
 
@@ -62,14 +61,15 @@ namespace TravelAgency.Web.Areas.Company.Controllers
                 return View(new CreateTripViewModel { Companies = companies, Countries = countries });
             }
             this.trips.Create(model.Name, model.Company, model.Destination, model.Capacity, model.Price, model.StartDate, model.EndDate);
+            this.AddTempDataNotification("Trip created!", NotificationType.Success);
             return RedirectToAction(nameof(Index), new { id = model.Company });
         }
-
-        [HttpPost]
+        
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            return null;
+            this.trips.Delete(id);
+            return RedirectToAction(nameof(Index), new { id = RouteData.Values["id"] });
         }
     }
 }

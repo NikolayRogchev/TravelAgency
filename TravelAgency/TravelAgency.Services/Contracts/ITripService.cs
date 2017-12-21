@@ -13,5 +13,6 @@ namespace TravelAgency.Services.Contracts
         IEnumerable<TripListingServiceModel> AllByUser(string id);
         void Remove(int tripId, string userId);
         IEnumerable<CompanyTripListingServiceModel> AllByCompany(int id);
+        void Delete(int id);
     }
 }

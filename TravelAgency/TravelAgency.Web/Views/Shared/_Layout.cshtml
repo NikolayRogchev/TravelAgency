@@ -65,6 +65,7 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script type="text/javascript" src="~/js/trips.js"></script>
         <script src="~/js/notifier.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     </environment>
@@ -91,6 +92,12 @@
         {
             <script>
                 notifier.showMessage(@ViewBag.message, @ViewBag.messageType);
+            </script>
+        }
+        else if (TempData["message"] != null)
+        {
+            <script>
+                notifier.showMessage(@TempData["message"], @TempData["messageType"]);
             </script>
         }
     }

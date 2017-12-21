@@ -57,8 +57,8 @@ namespace TravelAgency.Services.Implementations
                 DestinationId = country.Id,
                 Capacity = capacity,
                 Price = price,
-                StartDate = DateTime.Parse(startDate),
-                EndDate = DateTime.Parse(endDate)
+                StartDate = startDate != null ? DateTime.Parse(startDate) : DateTime.Now,
+                EndDate = startDate != null ? DateTime.Parse(startDate) : DateTime.Now.AddDays(7)
             });
             this.db.SaveChanges();
         }
@@ -86,6 +86,16 @@ namespace TravelAgency.Services.Implementations
         public IEnumerable<CompanyTripListingServiceModel> AllByCompany(int id)
         {
             return this.db.Trips.Where(t => t.CompanyId == id).ProjectTo<CompanyTripListingServiceModel>().ToList();
+        }
+
+        public void Delete(int id)
+        {
+            Trip trip = this.db.Trips.FirstOrDefault(t => t.Id == id);
+            if (trip != null)
+            {
+                this.db.Trips.Remove(trip);
+                this.db.SaveChanges();
+            }
         }
     }
 }
