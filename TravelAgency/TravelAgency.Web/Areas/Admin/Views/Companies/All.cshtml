@@ -3,16 +3,18 @@
     ViewData["Title"] = "All Companies";
 }
 
-<h2>All Companies</h2>
+<h2 class="text-center">All Companies</h2>
 
-<div class="col-md-12">
-    @foreach (AdminCompanyListingServiceModel company in Model)
-    {
-        <div class="col-md-4 panel panel-default">
-            <h3 class="text-center">
-                @company.Name
-            </h3>
-            <p class="text-center">Owner <i>@company.Owner</i></p>
-        </div>
-    }
+<div class="container full-page">
+    <div class="col-md-12">
+        @foreach (AdminCompanyListingServiceModel company in Model)
+        {
+            <div class="col-md-4 panel panel-default">
+                <h3 class="text-center">
+                    @company.Name
+                </h3>
+                <p class="text-center">Owner <i>@company.Owner</i></p>
+            </div>
+        }
+    </div>
 </div>

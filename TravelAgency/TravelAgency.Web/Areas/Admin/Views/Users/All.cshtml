@@ -3,43 +3,44 @@
     ViewData["Title"] = "All";
 }
 
-<h2>All Users</h2>
-
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Roles</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (AdminUserListingServiceModel userListing in Model.Users)
-        {
-            <tr class="d-table-row">
-                <td>@userListing.UserName</td>
-                <td>@userListing.Email</td>
-                <td>
-                    <ul>
-                        @foreach (string role in userListing.Roles)
-                        {
-                            <li>@role</li>
-                        }
-                    </ul>
-                </td>
-                <td>
-                    <form asp-action="AddToRole" method="post">
-                        <div class="col-md-6">
-                            <input type="hidden" name="UserId" value="@userListing.Id" />
-                            <select asp-items="@Model.Roles" name="Role" class="form-control"></select>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Add To Role"/>
-                        </div>
-                    </form>
-                </td>
+<h2 class="text-center">All Users</h2>
+<div class="container full-page">
+    <table class="table table-bordered table-hover table-white">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (AdminUserListingServiceModel userListing in Model.Users)
+            {
+                <tr class="d-table-row">
+                    <td>@userListing.UserName</td>
+                    <td>@userListing.Email</td>
+                    <td>
+                        <ul>
+                            @foreach (string role in userListing.Roles)
+                            {
+                                <li>@role</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        <form asp-action="AddToRole" method="post">
+                            <div class="col-md-6">
+                                <input type="hidden" name="UserId" value="@userListing.Id" />
+                                <select asp-items="@Model.Roles" name="Role" class="form-control"></select>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Add To Role" />
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

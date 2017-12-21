@@ -5,7 +5,7 @@
 
 @if (Model.Trips.Count() != 0)
 {
-    <h2>Trips for company <i>@Model.Company</i></h2>
+    <h2 class="text-center">Trips for company <i>@Model.Company</i></h2>
 
     <div class="container">
         @foreach (CompanyTripListingServiceModel trip in Model.Trips)

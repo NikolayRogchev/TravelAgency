@@ -3,12 +3,12 @@
     ViewData["Title"] = "My Companies";
 }
 
-<h2>My Companies</h2>
+<h2 class="text-center">My Companies</h2>
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="text-center text-danger"><h4>@TempData["ErrorMessage"]</h4></div>
 }
-<div class="col-md-12">
+<div class="row container full-page">
     @foreach (CompanyListingServiceModel company in Model)
     {
         <a asp-action="Index" asp-controller="Trips" asp-route-id="@company.Id">

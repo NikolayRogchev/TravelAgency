@@ -3,19 +3,25 @@
     ViewData["Title"] = "Create Company";
 }
 
-<h2>Create New Company</h2>
+<h2 class="text-center">Create New Company</h2>
 
-<form method="post" asp-action="Create">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+<div class="container full-page">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Owner"></label>
+                <input asp-for="Owner" class="form-control" />
+                <span asp-validation-for="Owner" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default btn-primary center-block">Create Company</button>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Owner"></label>
-        <input asp-for="Owner" class="form-control" />
-        <span asp-validation-for="Owner" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-default btn-primary">Create Company</button> 
-</form>
+    <div class="col-md-4"></div>
+</div>

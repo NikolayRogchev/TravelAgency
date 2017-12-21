@@ -33,3 +33,26 @@
         display: none;
     }
 }
+
+body {
+    background-image: url("http://localhost:51383/images/plane.jpg");
+    opacity:0.86;
+}
+
+.trip-listing {
+    height: 390px;
+}
+.trip-listing > .table-listing td{
+    padding: 6px;
+}
+.jumbotron {
+    background: transparent;
+    height: 75vh;
+    text-align:center;
+}
+.body-content, .full-page {
+    min-height:75vh;
+}
+.table-white {
+    background-color: #fff;
+}
