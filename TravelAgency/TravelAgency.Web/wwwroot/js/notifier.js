@@ -20,6 +20,23 @@
     }
 })();
 
+
+notifier.showMessage = function (message, type) {
+    switch (type.toLowerCase()) {
+        case "warnin":
+            notifier.showWarning(message);
+            break;
+        case "error":
+            notifier.showError(message);
+            break;
+        case "success":
+            notifier.showSuccess(message);
+            break;
+        default:
+            notifier.showInfo(message);
+            break;
+    }
+}
 notifier.showInfo = function (message) {
     toastr.info(message);
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelAgency.Common;
+using static TravelAgency.Common.Enums;
 
 namespace TravelAgency.Web.Areas.Company.Controllers
 {
@@ -12,5 +13,10 @@ namespace TravelAgency.Web.Areas.Company.Controllers
     [Authorize(Roles = WebConstants.CompanyOwnerRole)]
     public class BaseCompanyController : Controller
     {
+        internal void AddNotification(string message, NotificationType type)
+        {
+            ViewBag.messageType = (string)type.ToString();
+            ViewBag.message = message;
+        }
     }
 }

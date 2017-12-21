@@ -10,5 +10,8 @@ namespace TravelAgency.Common
         public const string AdministratorArea = "Admin";
         public const string CompanyOwnerRole = "Company Owner";
         public const string CompanyArea = "Company";
+
+        public const string NotificationTypeKey = "messageType";
+        public const string NotificationMessageKey = "message";
     }
 }

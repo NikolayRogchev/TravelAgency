@@ -9,10 +9,10 @@ trip.signUp = function (tripId) {
             var cell = $("#btn-area-" + tripId);
             cell.empty();
             cell.append('<a class="btn btn-danger form-control" onclick="trip.removeSignUp(' + tripId + ')">Remove</a>');
-            notifier.showSuccess("Signed Up!");
+            //notifier.showSuccess("Signed Up!");
         },
         error: function () {
-            notifier.showError("Error signing!");
+            //notifier.showError("Error signing!");
         }
     })
 }
@@ -25,10 +25,10 @@ trip.removeSignUp = function (tripId) {
             var cell = $("#btn-area-" + tripId);
             cell.empty();
             cell.append('<a class="btn btn-success form-control" onclick="trip.signUp(' + tripId + ')">Sign Up</a>');
-            notifier.showSuccess("Trip removed!");
+            //notifier.showSuccess("Trip removed!");
         },
         error: function () {
-            notifier.showError("Error removing trip!");
+            //notifier.showError("Error removing trip!");
         }
     })
 }

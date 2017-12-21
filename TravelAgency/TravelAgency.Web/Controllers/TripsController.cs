@@ -10,10 +10,11 @@ using TravelAgency.Data;
 using TravelAgency.Data.Models;
 using TravelAgency.Services.Contracts;
 using TravelAgency.Services.Models.Trips;
+using static TravelAgency.Common.Enums;
 
 namespace TravelAgency.Web.Controllers
 {
-    public class TripsController : Controller
+    public class TripsController : BaseController
     {
         private readonly ITripService trips;
         private readonly UserManager<User> userManager;
@@ -43,6 +44,7 @@ namespace TravelAgency.Web.Controllers
         {
             User user = await this.userManager.FindByNameAsync(User.Identity.Name);
             this.trips.SignUp(user.Id, id);
+            this.AddNotification("Signed up for this trip", NotificationType.Success);
             return RedirectToAction(nameof(All));
         }
         [Authorize]
@@ -57,6 +59,7 @@ namespace TravelAgency.Web.Controllers
         {
             User user = await this.userManager.FindByNameAsync(User.Identity.Name);
             this.trips.Remove(id, user.Id);
+            this.AddNotification("Trip removed", NotificationType.Success);
             return RedirectToAction(nameof(All));
         }
     }

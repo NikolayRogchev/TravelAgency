@@ -8,7 +8,7 @@ using TravelAgency.Web.Models;
 
 namespace TravelAgency.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IActionResult Index()
         {

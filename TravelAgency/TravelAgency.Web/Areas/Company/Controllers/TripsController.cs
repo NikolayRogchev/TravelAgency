@@ -8,6 +8,7 @@ using TravelAgency.Data.Models;
 using TravelAgency.Services.Contracts;
 using TravelAgency.Services.Models.Trips;
 using TravelAgency.Web.Areas.Company.ViewModels;
+using static TravelAgency.Common.Enums;
 
 namespace TravelAgency.Web.Areas.Company.Controllers
 {
@@ -43,7 +44,7 @@ namespace TravelAgency.Web.Areas.Company.Controllers
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
             IEnumerable<SelectListItem> companies = this.companies.AllByUser(User.Identity.Name)
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
-
+            this.AddNotification("Trip created!", NotificationType.Success);
             return View(new CreateTripViewModel { Companies = companies, Countries = countries });
         }
 

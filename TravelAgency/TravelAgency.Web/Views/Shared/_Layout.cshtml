@@ -85,5 +85,14 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+    @{
+        string messageKey = WebConstants.NotificationMessageKey.ToString();
+        @if (ViewBag.message != null)
+        {
+            <script>
+                notifier.showMessage(@ViewBag.message, @ViewBag.messageType);
+            </script>
+        }
+    }
 </body>
 </html>
