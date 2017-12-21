@@ -22,7 +22,9 @@ namespace TravelAgency.Web.Areas.Company.ViewModels
         public decimal Price { get; set; }
         [Range(0, 200)]
         public int Capacity { get; set; }
+        [DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
+        [DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
         [Required]
         public int Company { get; set; }

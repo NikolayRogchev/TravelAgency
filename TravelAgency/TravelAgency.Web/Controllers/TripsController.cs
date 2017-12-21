@@ -45,5 +45,18 @@ namespace TravelAgency.Web.Controllers
             this.trips.SignUp(user.Id, id);
             return RedirectToAction(nameof(All));
         }
+        [Authorize]
+        public async Task<IActionResult> MyTrips()
+        {
+            User user = await this.userManager.FindByNameAsync(User.Identity.Name);
+            IEnumerable<TripListingServiceModel> trips = this.trips.AllByUser(user.Id);
+            return View(trips);
+        }
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public IActionResult Remove(int id)
+        {
+            this.trips.Remove(id);
+        }
     }
 }

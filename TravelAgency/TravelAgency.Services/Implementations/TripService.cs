@@ -1,4 +1,5 @@
 ﻿using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +26,21 @@ namespace TravelAgency.Services.Implementations
         {
             List<TripListingServiceModel> signedTrips = this.db.Trips
                 .Where(t => (companyId == null || t.Company.Id == companyId) && t.SignedUsers.Any(ut => ut.UserId == userId))
-                .ProjectTo<TripListingServiceModel>(new { isSignedUp = true }).ToList();
+                .ProjectTo<TripListingServiceModel>().ToList();
+            signedTrips.ForEach(x => x.IsSignedUp = true);
             List<TripListingServiceModel> unSignedTrips = this.db.Trips
                .Where(t => (companyId == null || t.Company.Id == companyId) && !t.SignedUsers.Any(ut => ut.UserId == userId))
-               .ProjectTo<TripListingServiceModel>(new { isSignedUp = false }).ToList();
+               .ProjectTo<TripListingServiceModel>().ToList();
+            unSignedTrips.ForEach(x => x.IsSignedUp = false);
             IEnumerable<TripListingServiceModel> result = signedTrips.Union(unSignedTrips);
+            return result;
+        }
+
+        public IEnumerable<TripListingServiceModel> AllByUser(string id)
+        {
+            IEnumerable<Trip> trips = this.db.Trips.Include(t => t.SignedUsers).Where(t => t.SignedUsers.Any(ut => ut.UserId == id));
+            List<TripListingServiceModel> result = trips.AsQueryable().ProjectTo<TripListingServiceModel>().ToList();
+            result.ForEach(t => t.IsSignedUp = true);
             return result;
         }
 
@@ -50,11 +61,16 @@ namespace TravelAgency.Services.Implementations
             });
             this.db.SaveChanges();
         }
-
+        
         public void SignUp(string userId, int tripId)
         {
             this.db.Trips.FirstOrDefault(t => t.Id == tripId).SignedUsers.Add(new UserTrip { TripId = tripId, UserId = userId });
             this.db.SaveChanges();
+        }
+
+        public void Remove(int id)
+        {
+
         }
     }
 }
