@@ -35,7 +35,7 @@ namespace TravelAgency.Web.Controllers
             {
                 trips = this.trips.All(null, null);
             }
-            return View(trips);
+            return View(trips.OrderByDescending(t => t.Price));
         }
 
         [Authorize]
@@ -53,10 +53,11 @@ namespace TravelAgency.Web.Controllers
             return View(trips);
         }
         [Authorize]
-        [ValidateAntiForgeryToken]
-        public IActionResult Remove(int id)
+        public async Task<IActionResult> Remove(int id)
         {
-            this.trips.Remove(id);
+            User user = await this.userManager.FindByNameAsync(User.Identity.Name);
+            this.trips.Remove(id, user.Id);
+            return RedirectToAction(nameof(All));
         }
     }
 }

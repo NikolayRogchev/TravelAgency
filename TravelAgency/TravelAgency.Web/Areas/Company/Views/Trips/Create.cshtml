@@ -23,18 +23,13 @@
         <span asp-validation-for="Company" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Duration"></label>
-        <input asp-for="Duration" type="number" min="0" class="form-control" />
-        <span asp-validation-for="Duration" class="text-danger"></span>
-    </div>
-    <div class="form-group">
         <label asp-for="Price"></label>
         <input asp-for="Price" type="number" min="0" class="form-control" />
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="StartDate"></label>
-        <input asp-for="StartDate" type="date" class="form-control" />
+        <input asp-for="StartDate" type="date" step="1" class="form-control" />
         <span asp-validation-for="StartDate" class="text-danger"></span>
     </div>
     <div class="form-group">

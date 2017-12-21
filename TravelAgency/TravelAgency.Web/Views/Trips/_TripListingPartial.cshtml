@@ -1,15 +1,18 @@
 ﻿@model TripListingServiceModel
 
-<div class="panel panel-body panel-default col-md-4" style="height:380px;">
+<div class="panel panel-body panel-default col-md-4" style="height:450px;">
     <h3>@Model.Name</h3>
     <table class="table">
+        <tr class="d-table-row">
+            <td colspan="2">by <i>@Model.CompanyName</i></td>
+        </tr>
         <tr class="d-table-row">
             <td><label asp-for="@Model.SignedUsersCount"></label></td>
             <td>@Model.SignedUsersCount</td>
         </tr>
         <tr class="d-table-row">
-            <td><label asp-for="@Model.Destination"></label></td>
-            <td>@Model.Destination</td>
+            <td><label asp-for="@Model.DestinationName"></label></td>
+            <td>@Model.DestinationName</td>
         </tr>
         <tr class="d-table-row">
             <td><label asp-for="@Model.Price"></label></td>
@@ -24,24 +27,28 @@
             <td>@Model.EndDate.ToShortDateString()</td>
         </tr>
         <tr class="d-table-row">
+            <td><label asp-for="@Model.Duration"></label></td>
+            <td>@Model.Duration @(Model.Duration == 1 ? "day" : "days")</td>
+        </tr>
+        <tr class="d-table-row">
             <td colspan="2">
                 @if (!Model.IsSignedUp)
-                {
-                    <a class="btn btn-success form-control"
-                       asp-area=""
-                       asp-controller="Trips"
-                       asp-action="SignUp"
-                       asp-route-id="@Model.Id">Sign Up</a>
-                }
-                else
-                {
-                    @*<p class="text-center text-success">You are signed up for this trip</p>*@
-                    <a class="btn btn-danger form-control"
-                       asp-area=""
-                       asp-controller="Trips"
-                       asp-action="Remove"
-                       asp-route-id="@Model.Id">Remove</a>
-                }
+            {
+                <a class="btn btn-success form-control"
+                   asp-area=""
+                   asp-controller="Trips"
+                   asp-action="SignUp"
+                   asp-route-id="@Model.Id">Sign Up</a>
+        }
+        else
+        {
+            @*<p class="text-center text-success">You are signed up for this trip</p>*@
+            <a class="btn btn-danger form-control"
+               asp-area=""
+               asp-controller="Trips"
+               asp-action="Remove"
+               asp-route-id="@Model.Id">Remove</a>
+    }
             </td>
         </tr>
     </table>

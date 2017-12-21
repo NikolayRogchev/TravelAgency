@@ -11,9 +11,10 @@ using TravelAgency.Data;
 namespace TravelAgency.Data.Migrations
 {
     [DbContext(typeof(TravelAgencyDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171221091655_StartDateEndDateDuration")]
+    partial class StartDateEndDateDuration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,9 +174,10 @@ namespace TravelAgency.Data.Migrations
 
                     b.Property<TimeSpan>("Duration")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasComputedColumnSql("DATEDIFF(dd, [EndDate], [StartDate]");
+                        .HasComputedColumnSql("[EndDate] - [StartDate]");
 
-                    b.Property<DateTime>("EndDate");
+                    b.Property<DateTime?>("EndDate")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -183,7 +185,8 @@ namespace TravelAgency.Data.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<DateTime>("StartDate");
+                    b.Property<DateTime?>("StartDate")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

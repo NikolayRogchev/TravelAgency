@@ -24,17 +24,16 @@ namespace TravelAgency.Web.Areas.Company.Controllers
             this.countries = countries;
             this.userManager = userManager;
         }
-        public async Task<IActionResult> Index(int id)
+        public IActionResult Index(int id)
         {
             if (!this.companies.CompanyExist(id))
             {
                 TempData["ErrorMessage"] = "This company does not exist";
                 return RedirectToAction(nameof(Index), "Home", null);
             }
-            User user = await this.userManager.FindByNameAsync(User.Identity.Name);
-            IEnumerable<TripListingServiceModel> trips = this.trips.All(id, user.Id);
+            IEnumerable<CompanyTripListingServiceModel> trips = this.trips.AllByCompany(id);
             string companyName = this.companies.GetName(id)?.Name;
-            return View(new TripListingViewModel { Company = companyName, Trips = trips });
+            return View(new CompanyTripListingViewModel { Company = companyName, Trips = trips });
         }
 
         [HttpGet]
@@ -44,6 +43,7 @@ namespace TravelAgency.Web.Areas.Company.Controllers
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
             IEnumerable<SelectListItem> companies = this.companies.AllByUser(User.Identity.Name)
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+
             return View(new CreateTripViewModel { Companies = companies, Countries = countries });
         }
 
@@ -57,9 +57,10 @@ namespace TravelAgency.Web.Areas.Company.Controllers
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
                 IEnumerable<SelectListItem> companies = this.companies.AllByUser(User.Identity.Name)
                     .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+
                 return View(new CreateTripViewModel { Companies = companies, Countries = countries });
             }
-            this.trips.Create(model.Name, model.Company, model.Destination, model.Capacity, model.Duration, model.Price);
+            this.trips.Create(model.Name, model.Company, model.Destination, model.Capacity, model.Price, model.StartDate, model.EndDate);
             return RedirectToAction(nameof(Index), new { id = model.Company });
         }
     }

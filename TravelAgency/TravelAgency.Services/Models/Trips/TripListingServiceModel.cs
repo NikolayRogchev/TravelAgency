@@ -12,9 +12,12 @@ namespace TravelAgency.Services.Models.Trips
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [Display(Name = "Company")]
+        public string CompanyName { get; set; }
+        public int Duration { get; set; }
         [Display(Name = "Subscribed Users")]
         public int SignedUsersCount { get; set; }
-        public string Destination { get; set; }
+        public string DestinationName { get; set; }
         [Display(Name = "From")]
         public DateTime StartDate { get; set; }
         [Display(Name = "To")]
@@ -24,7 +27,9 @@ namespace TravelAgency.Services.Models.Trips
         public void ConfigureMapping(Profile profile)
         {
             profile.CreateMap<Trip, TripListingServiceModel>().ForMember(t => t.SignedUsersCount, cfg => cfg.MapFrom(t => t.SignedUsers.Count));
-            profile.CreateMap<Trip, TripListingServiceModel>().ForMember(t => t.Destination, cfg => cfg.MapFrom(t => t.Destination.Name));
+            profile.CreateMap<Trip, TripListingServiceModel>().ForMember(t => t.CompanyName, cfg => cfg.MapFrom(t => t.Company.Name));
+            profile.CreateMap<Trip, TripListingServiceModel>().ForMember(t => t.DestinationName, cfg => cfg.MapFrom(t => t.Destination.Name));
+            profile.CreateMap<Trip, TripListingServiceModel>().ForMember(t => t.Duration, cfg => cfg.MapFrom(t => Math.Abs(t.Duration)));
         }
     }
 }

@@ -44,7 +44,7 @@ namespace TravelAgency.Services.Implementations
             return result;
         }
 
-        public void Create(string name, int companyId, int destinationId, int capacity, int duration, decimal price)
+        public void Create(string name, int companyId, int destinationId, int capacity, decimal price, string startDate, string endDate)
         {
             Company company = this.companies.FindById(companyId);
             Country country = this.countries.FindById(destinationId);
@@ -56,21 +56,36 @@ namespace TravelAgency.Services.Implementations
                 Destination = country,
                 DestinationId = country.Id,
                 Capacity = capacity,
-                Duration = duration,
-                Price = price
+                Price = price,
+                StartDate = DateTime.Parse(startDate),
+                EndDate = DateTime.Parse(endDate)
             });
             this.db.SaveChanges();
         }
-        
+
         public void SignUp(string userId, int tripId)
         {
-            this.db.Trips.FirstOrDefault(t => t.Id == tripId).SignedUsers.Add(new UserTrip { TripId = tripId, UserId = userId });
+            try
+            {
+                this.db.Trips.FirstOrDefault(t => t.Id == tripId).SignedUsers.Add(new UserTrip { TripId = tripId, UserId = userId });
+                this.db.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void Remove(int tripId, string userId)
+        {
+            UserTrip trip = this.db.UserTrips.FirstOrDefault(ut => ut.UserId == userId && ut.TripId == tripId);
+            this.db.UserTrips.Remove(trip);
             this.db.SaveChanges();
         }
 
-        public void Remove(int id)
+        public IEnumerable<CompanyTripListingServiceModel> AllByCompany(int id)
         {
-
+            return this.db.Trips.Where(t => t.CompanyId == id).ProjectTo<CompanyTripListingServiceModel>().ToList();
         }
     }
 }
