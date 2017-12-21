@@ -63,5 +63,12 @@ namespace TravelAgency.Web.Areas.Company.Controllers
             this.trips.Create(model.Name, model.Company, model.Destination, model.Capacity, model.Price, model.StartDate, model.EndDate);
             return RedirectToAction(nameof(Index), new { id = model.Company });
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            return null;
+        }
     }
 }

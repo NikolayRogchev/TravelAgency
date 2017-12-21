@@ -2,21 +2,20 @@
 @{
     ViewData["Title"] = "Trips";
 }
-
-@if (Model.Trips.Count() != 0)
-{
-    <h2 class="text-center">Trips for company <i>@Model.Company</i></h2>
-
-    <div class="container">
-        @foreach (CompanyTripListingServiceModel trip in Model.Trips)
-        {
-            <div class="col-md-4">
-                <h3>@trip.Name</h3>
-            </div>
-        }
-    </div>
-}
-else
-{
-    <h2>Company <i>@Model.Company</i> does not have any trips at this moment</h2>
-}
+<div class="container full-page">
+    @if (Model.Trips.Count() != 0)
+    {
+        <h2 class="text-center">Trips for company <i>@Model.Company</i></h2>
+        <hr />
+        <div class="row">
+            @foreach (CompanyTripListingServiceModel trip in Model.Trips)
+            {
+                @Html.Partial("_TripListingPartial", trip);
+            }
+        </div>
+    }
+    else
+    {
+        <h2>Company <i>@Model.Company</i> does not have any trips at this moment</h2>
+    }
+</div>

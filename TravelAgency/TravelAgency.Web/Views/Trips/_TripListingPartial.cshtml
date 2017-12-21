@@ -8,7 +8,7 @@
         </tr>
         <tr class="d-table-row">
             <td><label asp-for="@Model.SignedUsersCount"></label></td>
-            <td>@Model.SignedUsersCount</td>
+            <td id="signed-users-count-@Model.Id">@Model.SignedUsersCount</td>
         </tr>
         <tr class="d-table-row">
             <td><label asp-for="@Model.DestinationName"></label></td>
@@ -31,24 +31,15 @@
             <td>@Model.Duration @(Model.Duration == 1 ? "day" : "days")</td>
         </tr>
         <tr class="d-table-row">
-            <td colspan="2">
+            <td id="btn-area-@Model.Id" colspan="2">
                 @if (!Model.IsSignedUp)
-            {
-                <a class="btn btn-success form-control"
-                   asp-area=""
-                   asp-controller="Trips"
-                   asp-action="SignUp"
-                   asp-route-id="@Model.Id">Sign Up</a>
-        }
-        else
-        {
-            @*<p class="text-center text-success">You are signed up for this trip</p>*@
-            <a class="btn btn-danger form-control"
-               asp-area=""
-               asp-controller="Trips"
-               asp-action="Remove"
-               asp-route-id="@Model.Id">Remove</a>
-    }
+                {
+                    <a class="btn btn-success form-control" onclick="trip.signUp(@Model.Id)">Sign Up</a>
+                }
+                else
+                {
+                    <a class="btn btn-danger form-control" onclick="trip.removeSignUp(@Model.Id)">Remove</a>
+                }
             </td>
         </tr>
     </table>
