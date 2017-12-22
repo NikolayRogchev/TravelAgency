@@ -14,7 +14,7 @@ namespace TravelAgency.Web.Areas.Company.ViewModels
     public class EditTripViewModel : IMapFrom<Trip>
     {
         public EditTripServiceModel Trip { get; set; }
-        public IEnumerable<SelectListItem> Countries { get; set; }
-        public IEnumerable<SelectListItem> Companies { get; set; }
+        //public IEnumerable<SelectListItem> Countries { get; set; }
+        //public IEnumerable<SelectListItem> Companies { get; set; }
     }
 }

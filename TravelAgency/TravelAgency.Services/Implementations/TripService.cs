@@ -103,14 +103,14 @@ namespace TravelAgency.Services.Implementations
             return this.db.Trips.Where(t => t.Id == id).ProjectTo<EditTripServiceModel>().FirstOrDefault();
         }
 
-        public void Edit(int id, string name, int companyId, int destinationId, int capacity, decimal price, DateTime startDate, DateTime endDate)
+        public void Edit(int id, string name, /*int companyId, int destinationId,*/ int capacity, decimal price, DateTime startDate, DateTime endDate)
         {
             Trip trip = this.db.Trips.FirstOrDefault(t => t.Id == id);
             if (trip != null)
             {
                 trip.Name = name;
-                trip.CompanyId = companyId;
-                trip.DestinationId = destinationId;
+                //trip.CompanyId = companyId;
+                //trip.DestinationId = destinationId;
                 trip.Capacity = capacity;
                 trip.Price = price;
                 trip.StartDate = startDate;

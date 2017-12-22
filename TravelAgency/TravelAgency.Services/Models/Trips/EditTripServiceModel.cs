@@ -15,7 +15,6 @@ namespace TravelAgency.Services.Models.Trips
         [Required]
         [StringLength(50, ErrorMessage = Messages.MaxLengthExceededMessage)]
         public string Name { get; set; }
-        [Required]
         public string Destination { get; set; }
         [Required]
         [Range(0, int.MaxValue)]
@@ -24,12 +23,11 @@ namespace TravelAgency.Services.Models.Trips
         public int Capacity { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        [Required]
-        public string Company { get; set; }
-
+        public string CompanyName { get; set; }
+        public int CompanyId { get; set; }
         public void ConfigureMapping(Profile profile)
         {
-            profile.CreateMap<Trip, EditTripServiceModel>().ForMember(t => t.Company, cfg => cfg.MapFrom(t => t.Company.Name));
+            profile.CreateMap<Trip, EditTripServiceModel>().ForMember(t => t.CompanyName, cfg => cfg.MapFrom(t => t.Company.Name));
             profile.CreateMap<Trip, EditTripServiceModel>().ForMember(t => t.Destination, cfg => cfg.MapFrom(t => t.Destination.Name));
         }
     }
