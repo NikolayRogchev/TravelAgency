@@ -6,6 +6,7 @@ using AutoMapper;
 using TravelAgency.Common;
 using TravelAgency.Common.Mapping;
 using TravelAgency.Data.Models;
+using TravelAgency.Services.Infrastructure.Attributes;
 
 namespace TravelAgency.Services.Models.Trips
 {
@@ -21,7 +22,9 @@ namespace TravelAgency.Services.Models.Trips
         public decimal Price { get; set; }
         [Range(0, 200)]
         public int Capacity { get; set; }
+        [StartDate]
         public DateTime StartDate { get; set; }
+        [EndDate]
         public DateTime EndDate { get; set; }
         public string CompanyName { get; set; }
         public int CompanyId { get; set; }
