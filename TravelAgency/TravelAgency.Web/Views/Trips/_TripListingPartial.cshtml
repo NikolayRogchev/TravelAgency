@@ -31,16 +31,27 @@
             <td>@Model.Duration @(Model.Duration == 1 ? "day" : "days")</td>
         </tr>
         <tr class="d-table-row">
-            <td id="btn-area-@Model.Id" colspan="2">
-                @if (!Model.IsSignedUp)
-                {
-                    <a class="btn btn-success form-control" onclick="trip.signUp(@Model.Id)">Sign Up</a>
-                }
-                else
-                {
-                    <a class="btn btn-danger form-control" onclick="trip.removeSignUp(@Model.Id)">Remove</a>
-                }
-            </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td id="btn-area-@Model.Id" colspan="2">
+                    @if (!Model.IsSignedUp)
+                    {
+                        <a class="btn btn-success form-control" onclick="trip.signUp(@Model.Id)">Sign Up</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger form-control" onclick="trip.removeSignUp(@Model.Id)">Remove</a>
+                    }
+                </td>
+            }
+            else
+            {
+                <td colspan="2">
+                    <span class="text-center form-control">
+                        <a asp-area="" asp-controller="Account" asp-action="LogIn">Log In</a> or <a asp-area="" asp-controller="Account" asp-action="Register">Register</a> to sign up for trip
+                    </span>
+                </td>
+            }
         </tr>
     </table>
 </div>

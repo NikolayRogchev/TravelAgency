@@ -58,7 +58,7 @@ namespace TravelAgency.Services.Implementations
                 Capacity = capacity,
                 Price = price,
                 StartDate = startDate != null ? DateTime.Parse(startDate) : DateTime.Now,
-                EndDate = startDate != null ? DateTime.Parse(startDate) : DateTime.Now.AddDays(7)
+                EndDate = startDate != null ? DateTime.Parse(endDate) : DateTime.Now.AddDays(7)
             });
             this.db.SaveChanges();
         }

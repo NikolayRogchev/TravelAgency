@@ -65,11 +65,10 @@ namespace TravelAgency.Web.Areas.Company.Controllers
             return RedirectToAction(nameof(Index), new { id = model.Company });
         }
         
-        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             this.trips.Delete(id);
-            return RedirectToAction(nameof(Index), new { id = RouteData.Values["id"] });
+            return NoContent();
         }
     }
 }

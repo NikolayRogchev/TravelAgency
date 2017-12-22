@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TravelAgency.Common;
 using TravelAgency.Data.Models;
@@ -20,28 +22,35 @@ namespace TravelAgency.Web.Areas.Admin.Controllers
         }
         public IActionResult All() => View(this.companies.All());
 
-        public IActionResult Create() => View();
+        [HttpGet]
+        public IActionResult Create()
+        {
+            //var companies = this.companies.All();
+            var users = this.userManager.Users.Select(u => u.UserName);
+            string usersJoined = string.Join(';', users);
+            return View(new CreateCompanyViewModel { Users = usersJoined });
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateCompanyFormModel model)
+        public async Task<IActionResult> Create(CreateCompanyViewModel model)
         {
-            if (!string.IsNullOrEmpty(model.Owner))
+            if (!string.IsNullOrEmpty(model.FormModel.Owner))
             {
-                User user = await this.userManager.FindByNameAsync(model.Owner);
+                User user = await this.userManager.FindByNameAsync(model.FormModel.Owner);
                 if (user == null)
                 {
-                    ModelState.AddModelError("", $"User {model.Owner} not found");
+                    ModelState.AddModelError("", $"User {model.FormModel.Owner} not found");
                 }
             }
             if (!ModelState.IsValid)
             {
                 return View();
             }
-            this.companies.Create(model.Name, model.Owner);
-            User owner = await userManager.FindByNameAsync(model.Owner);
+            this.companies.Create(model.FormModel.Name, model.FormModel.Owner);
+            User owner = await userManager.FindByNameAsync(model.FormModel.Owner);
             IdentityResult addToRoleResult = await userManager.AddToRoleAsync(owner, WebConstants.CompanyOwnerRole);
-            this.AddNotification($"Company {model.Name} created", NotificationType.Success);
+            this.AddNotification($"Company {model.FormModel.Name} created", NotificationType.Success);
             return RedirectToAction(nameof(All));
         }
     }

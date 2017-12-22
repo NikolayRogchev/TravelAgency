@@ -1,8 +1,16 @@
-﻿@model CreateCompanyFormModel
+﻿@model CreateCompanyViewModel
 @{
     ViewData["Title"] = "Create Company";
 }
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<!-- JS file -->
+<script src="../../lib/EasyAutocomplete/jquery.easy-autocomplete.min.js"></script>
 
+<!-- CSS file -->
+<link rel="stylesheet" href="../../lib/EasyAutocomplete/easy-autocomplete.min.css">
+
+<!-- Additional CSS Themes file - not required-->
+<link rel="stylesheet" href="../../lib/EasyAutocomplete/easy-autocomplete.themes.min.css">
 <h2 class="text-center">Create New Company</h2>
 
 <div class="container full-page">
@@ -11,17 +19,33 @@
         <form method="post" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="@Model.FormModel.Name"></label>
+                <input asp-for="@Model.FormModel.Name" class="form-control" />
+                <span asp-validation-for="@Model.FormModel.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Owner"></label>
-                <input asp-for="Owner" class="form-control" />
-                <span asp-validation-for="Owner" class="text-danger"></span>
+                <label asp-for="@Model.FormModel.Owner"></label>
+                <input asp-for="@Model.FormModel.Owner" class="form-control" id="owner" />
+                <span asp-validation-for="@Model.FormModel.Owner" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-default btn-primary center-block">Create Company</button>
         </form>
     </div>
     <div class="col-md-4"></div>
 </div>
+<script>
+    if (!sessionStorage["users"]) {
+        var usersPicked = '@(@Model != null ? Model.Users : "")';
+        sessionStorage["users"] = usersPicked.split(";");
+    }
+    var options = {
+        data: sessionStorage["users"].split(","),
+        list: {
+            match: {
+                enabled: true
+            }
+        }
+    };
+
+    $("#owner").easyAutocomplete(options);
+</script>
