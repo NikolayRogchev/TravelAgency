@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace TravelAgency.Web.Areas.Company.Controllers
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
             IEnumerable<SelectListItem> companies = this.companies.AllByUser(User.Identity.Name)
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
-            return View(new CreateTripViewModel { Companies = companies, Countries = countries });
+            return View(new CreateTripViewModel { StartDate = DateTime.Now, EndDate = DateTime.Now, Companies = companies, Countries = countries });
         }
 
         [HttpPost]
@@ -69,6 +70,30 @@ namespace TravelAgency.Web.Areas.Company.Controllers
         {
             this.trips.Delete(id);
             return NoContent();
+        }
+
+        public IActionResult Edit(int id)
+        {
+            EditTripServiceModel editTrip  = this.trips.Find(id);
+            IEnumerable<SelectListItem> countries = this.countries.All()
+                .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+            IEnumerable<SelectListItem> companies = this.companies.AllByUser(User.Identity.Name)
+                .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+
+            return View(new EditTripViewModel { Trip = editTrip, Companies = companies, Countries = countries });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(EditTripViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            this.trips.Edit(model.Trip.Id, model.Trip.Name, int.Parse(model.Trip.Company), int.Parse(model.Trip.Destination), model.Trip.Capacity, model.Trip.Price, model.Trip.StartDate, model.Trip.EndDate);
+            this.AddTempDataNotification("Trip updated", NotificationType.Success);
+            return RedirectToAction(nameof(Index), "Home", null);
         }
     }
 }

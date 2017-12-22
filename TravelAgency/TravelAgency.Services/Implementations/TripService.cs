@@ -44,7 +44,7 @@ namespace TravelAgency.Services.Implementations
             return result;
         }
 
-        public void Create(string name, int companyId, int destinationId, int capacity, decimal price, string startDate, string endDate)
+        public void Create(string name, int companyId, int destinationId, int capacity, decimal price, DateTime startDate, DateTime endDate)
         {
             Company company = this.companies.FindById(companyId);
             Country country = this.countries.FindById(destinationId);
@@ -57,8 +57,8 @@ namespace TravelAgency.Services.Implementations
                 DestinationId = country.Id,
                 Capacity = capacity,
                 Price = price,
-                StartDate = startDate != null ? DateTime.Parse(startDate) : DateTime.Now,
-                EndDate = startDate != null ? DateTime.Parse(endDate) : DateTime.Now.AddDays(7)
+                StartDate = startDate,
+                EndDate = endDate
             });
             this.db.SaveChanges();
         }
@@ -94,6 +94,27 @@ namespace TravelAgency.Services.Implementations
             if (trip != null)
             {
                 this.db.Trips.Remove(trip);
+                this.db.SaveChanges();
+            }
+        }
+
+        public EditTripServiceModel Find(int id)
+        {
+            return this.db.Trips.Where(t => t.Id == id).ProjectTo<EditTripServiceModel>().FirstOrDefault();
+        }
+
+        public void Edit(int id, string name, int companyId, int destinationId, int capacity, decimal price, DateTime startDate, DateTime endDate)
+        {
+            Trip trip = this.db.Trips.FirstOrDefault(t => t.Id == id);
+            if (trip != null)
+            {
+                trip.Name = name;
+                trip.CompanyId = companyId;
+                trip.DestinationId = destinationId;
+                trip.Capacity = capacity;
+                trip.Price = price;
+                trip.StartDate = startDate;
+                trip.EndDate = endDate;
                 this.db.SaveChanges();
             }
         }

@@ -1,0 +1,52 @@
+﻿@model EditTripViewModel
+@{
+    ViewData["Title"] = "Edit Trip";
+}
+
+<h2>Edit Trip @Model.Trip.Name</h2>
+<div class="container full-page">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.Trip.Id" />
+            <div class="form-group">
+                <label asp-for="@Model.Trip.Name"></label>
+                <input asp-for="@Model.Trip.Name" class="form-control" />
+                <span asp-validation-for="@Model.Trip.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Trip.Destination"></label>
+                <select asp-for="@Model.Trip.Destination" asp-items="@Model.Countries" class="form-control"></select>
+                <span asp-validation-for="@Model.Trip.Destination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Trip.Company"></label>
+                <select asp-for="@Model.Trip.Company" asp-items="@Model.Companies" class="form-control"></select>
+                <span asp-validation-for="@Model.Trip.Company" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Trip.Price"></label>
+                <input asp-for="@Model.Trip.Price" type="number" min="0" class="form-control" />
+                <span asp-validation-for="@Model.Trip.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Trip.StartDate"></label>
+                <input asp-for="@Model.Trip.StartDate" type="date" class="form-control" />
+                <span asp-validation-for="@Model.Trip.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Trip.EndDate"></label>
+                <input asp-for="@Model.Trip.EndDate" type="date" class="form-control" />
+                <span asp-validation-for="@Model.Trip.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Trip.Capacity"></label>
+                <input asp-for="@Model.Trip.Capacity" type="number" class="form-control" />
+                <span asp-validation-for="@Model.Trip.Capacity" class="text-danger"></span>
+            </div>
+            <button asp-area="Company" asp-controller="Trips" asp-action="Edit" type="submit" class="btn btn-default btn-primary center-block">Edit Trip</button>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
