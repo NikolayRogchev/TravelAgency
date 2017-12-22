@@ -50,7 +50,7 @@ namespace TravelAgency.Web.Areas.Admin.Controllers
             this.companies.Create(model.FormModel.Name, model.FormModel.Owner);
             User owner = await userManager.FindByNameAsync(model.FormModel.Owner);
             IdentityResult addToRoleResult = await userManager.AddToRoleAsync(owner, WebConstants.CompanyOwnerRole);
-            this.AddNotification($"Company {model.FormModel.Name} created", NotificationType.Success);
+            this.AddTempDataNotification($"Company {model.FormModel.Name} created", NotificationType.Success);
             return RedirectToAction(nameof(All));
         }
     }

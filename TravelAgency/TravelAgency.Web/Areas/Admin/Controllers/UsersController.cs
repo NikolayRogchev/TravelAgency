@@ -47,7 +47,7 @@ namespace TravelAgency.Web.Areas.Admin.Controllers
             }
             User user = await userManager.FindByIdAsync(model.UserId);
             IdentityResult result = await this.userManager.AddToRoleAsync(user, model.Role);
-            this.AddNotification("User added to role " + model.Role, NotificationType.Success);
+            this.AddTempDataNotification("User added to role " + model.Role, NotificationType.Success);
             return RedirectToAction(nameof(All));
         }
     }

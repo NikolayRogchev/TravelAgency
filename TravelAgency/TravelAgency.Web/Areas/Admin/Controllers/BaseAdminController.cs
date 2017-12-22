@@ -13,10 +13,26 @@ namespace TravelAgency.Web.Areas.Admin.Controllers
     [Authorize(Roles = WebConstants.AdministratorRole)]
     public class BaseAdminController : Controller
     {
-        internal void AddNotification(string message, NotificationType type)
+        internal void AddTempDataNotification(string message, NotificationType type)
         {
-            ViewBag.messageType = (string)type.ToString();
-            ViewBag.message = message;
+            this.AddNotification("TempData", message, type);
+        }
+        internal void AddViewBagNotification(string message, NotificationType type)
+        {
+            this.AddNotification("ViewBag", message, type);
+        }
+        internal void AddNotification(string container, string message, NotificationType type)
+        {
+            if (container == "ViewBag")
+            {
+                ViewBag.messageType = (string)type.ToString();
+                ViewBag.message = message;
+            }
+            else if (container == "TempData")
+            {
+                TempData["messageType"] = (string)type.ToString();
+                TempData["message"] = message;
+            }
         }
     }
 }
